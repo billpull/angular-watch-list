@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title></title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+        <link rel="stylesheet" href="styles/main.css"/>
+
+    </head>
+    <body ng-app="watchListApp">
+
+        <div  class="container clearfix">
+            <!--[if lt IE 7]>
+                <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+            <![endif]-->
+
+            <div ng-controller="WatchListCtrl" class="float-left watch-list-wrap">
+                <header class="header watch-list-header">
+                    <h2>Watch List</h2>
+                </header>
+                <ul sort="items" class="watch-list">
+                    <li class="watch-list-item clearfix" ng-repeat="item in items" id="{{$index}}">
+                        <img ng-src="{{ item.images.thumbnail }}" alt="{{ item.title }}" class="watch-list-thumb float-left" />
+                        <div class="watch-list-info float-left">
+                            <h3>{{ item.title }}</h3>
+                        </div>
+                        <button class="float-right btn btn-danger remove-btn" ng-click="removeItem(item)">x</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div ng-controller="SearchCtrl" class="float-left search-wrap">
+                <header class="header search-header">
+                    <h2>Search TV/Movies - Results: {{items.length}}</h2>
+                </header>
+                <div class="search-box-wrap">
+                    <input type="text" class="search-box" ng-model="query" keypress="searchApi()" placeholder="Movies...T.V Shows...More" />
+                </div>
+                <ul class="search-results">
+                    <li ng-repeat="item in items" class="search-item clearfix">
+                        <img ng-src="{{ item.images.wide }}" alt="{{ item.title }}" class="float-left search-thumb" />
+                        <div class="float-left search-info">
+                            <h2>{{ item.title }}</h2>
+                            <h4 class="search-score">Score: {{ item.score }}</h4>
+
+                            <br>
+
+                            <button ng-click="addToWatchList(item)" class="btn btn-block btn-large btn-primary">Add to watch list</button>
+
+                            <br>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!--[if lt IE 9]>
+            <script src="scripts/vendor/es5-shim.min.js"></script>
+            <script src="scripts/vendor/json3.min.js"></script>
+        <![endif]-->
+
+        <script src="scripts/vendor/store.min.js"></script>
+        <script src="scripts/vendor/jquery.min.js"></script>
+        <script src="scripts/vendor/jquery-ui.min.js"></script>
+        <script src="scripts/vendor/angular.js"></script>
+        
+
+        <!-- build:js scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/search-controller.js"></script>
+        <script src="scripts/controllers/list-controller.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
